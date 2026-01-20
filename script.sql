@@ -30,3 +30,6 @@ SELECT
 FROM Organisation o
 LEFT JOIN Site si ON o.idOrganisation = si.idOrganisation
 LEFT JOIN Service se ON si.idSite = se.idSite;
+
+SHOW DATABASES;
+
