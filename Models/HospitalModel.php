@@ -6,21 +6,20 @@ class HospitalModel {
         $this->conn = $db;
     }
 
-    // Récupère toute la hiérarchie organisée
-    public function getAllData() {
-        $query = "SELECT 
-                    o.idOrganisation, o.nomOrganisation,
-                    s.idSite, s.nomSite,
-                    sv.idService, sv.nomService, sv.codePrefixe
-                  FROM Organisation o
-                  LEFT JOIN Site s ON o.idOrganisation = s.idOrganisation
-                  LEFT JOIN Service sv ON s.idSite = sv.idSite
-                  ORDER BY o.nomOrganisation, s.nomSite, sv.nomService";
-        
-        $stmt = $this->conn->prepare($query);
-        $stmt->execute();
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
-    }
+    // Suppression d'un site
+public function deleteSite($id) {
+    $query = "DELETE FROM Site WHERE idSite = :id";
+    $stmt = $this->conn->prepare($query);
+    return $stmt->execute([':id' => $id]);
+}
+
+// Nouvelle méthode utilisant la VUE SQL
+public function getAllDataFromView() {
+    $query = "SELECT * FROM vue_structure_complete ORDER BY nomOrganisation, nomSite, nomService";
+    $stmt = $this->conn->prepare($query);
+    $stmt->execute();
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
 
     public function createOrganisation($nom) {
         try {
@@ -75,5 +74,17 @@ public function getListOrganisations() {
     $stmt = $this->conn->prepare($query);
     $stmt->execute();
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+// Dans HospitalModel.php
+
+public function deleteOrganisation($id) {
+    try {
+        $query = "DELETE FROM Organisation WHERE idOrganisation = :id";
+        $stmt = $this->conn->prepare($query);
+        return $stmt->execute([':id' => $id]);
+    } catch (PDOException $e) {
+        error_log("Erreur suppression : " . $e->getMessage());
+        return false;
+    }
 }
 }
