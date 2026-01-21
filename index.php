@@ -8,7 +8,7 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-// 2. Importation des fichiers nécessaires
+// 2. Importation des fichiers nécessaires pour notre index 
 // Assurez-vous que les noms de dossiers et de fichiers sont exactement les mêmes
 require_once 'config/database.php';
 require_once 'models/HospitalModel.php';
