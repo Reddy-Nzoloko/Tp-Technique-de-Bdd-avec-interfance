@@ -68,6 +68,13 @@ public function createSite($nom, $idOrganisation) {
         return false;
     }
 }
+// fonction suppresion d'un service 
+
+public function deleteService($id) {
+    $query = "DELETE FROM Service WHERE idService = :id";
+    $stmt = $this->conn->prepare($query);
+    return $stmt->execute([':id' => $id]);
+}
 
 public function getListOrganisations() {
     $query = "SELECT idOrganisation, nomOrganisation FROM Organisation";
