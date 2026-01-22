@@ -101,3 +101,6 @@ CREATE UNIQUE INDEX idx_nomAnimal ON Animal(nomAnimal, idEspece);
 DELETE FROM Animal WHERE idAnimal = (SELECT MIN(idAnimal) FROM (SELECT idAnimal FROM Animal WHERE nomAnimal = 'Slinky' AND idEspece = 10) AS temp);
 
 insert INTO animal(nomAnimal, ageAnimal, idEspece) VALUES ('Slinky', 6, 10);
+
+-- selectionne en utilisant une jointure
+SELECT a.idAnimal, a.nomAnimal, a.ageAnimal, e.nomEspece
