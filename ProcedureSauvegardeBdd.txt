@@ -1,0 +1,38 @@
+Sauvegarde de la base de donnée processus: 
+
+Pour faire la sauvegarde on se place d'abord sur le disque C:mysqlbin, puis on va excecuté notre commande de MySQL dump 
+voici un example:
+
+C:\xamppA\mysql\bin>mysqldump -u root -p file_attente_consult >E:\Sauvegarde_Bdd/FileAttentesauvegarde.sql
+Enter password:
+
+C:\xamppA\mysql\bin> 
+
+Maintenant qu'on vient de sauvegarder on n'essaie de supprimer une base de donnée et la restaurer: mysql> drop DATABASE  file_attente_consult;  
+Query OK, 4 rows affected (1.50 sec)
+
+mysql> show DATABASES;
++----------------------+
+| Database             |
++----------------------+
+| consultationmedicale |
+| gallaxyavecpaiement  |
+| gestion_stock        |
+| information_schema   |
+| mysql                |
+| note_app             |
+| performance_schema   |
+| phpmyadmin           |
+| test                 |
++----------------------+
+9 rows in set (0.00 sec)
+
+
+Ici nous voyons que nous avons des bases de données et maintenant on va restaurer notre anciennes base de donnée avec cette commande mais avant tout je crée d'abord une base de donnée ou je vais restaurer mes données que j'ai sauvegarder:
+
+C:\xamppA\mysql\bin>mysql -u root -p file_attente_consult <E:\Sauvegarde_Bdd/FileAttentesauvegarde.sql
+Enter password:
+
+C:\xamppA\mysql\bin> 
+
+maintenant nous avons récupérer nos anciènnes données de notre base de données 
